@@ -195,10 +195,12 @@ const Index = () => {
             deploy your own instance.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Button variant="default" size="lg">
-              <GitBranch className="h-4 w-4" />
-              View on GitHub
-            </Button>
+            <a href="https://github.com/ParthasarathyJP/brokerage-hub-connect" target="_blank" rel="noopener noreferrer">
+              <Button variant="default" size="lg">
+                <GitBranch className="h-4 w-4" />
+                View on GitHub
+              </Button>
+            </a>
             <Button variant="outline" size="lg">
               Read the Docs
             </Button>
