@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import StatCard from "@/components/StatCard";
 import ServiceCard from "@/components/ServiceCard";
-import ArchitectureFlow from "@/components/ArchitectureFlow";
 import RecentActivity from "@/components/RecentActivity";
 import { Button } from "@/components/ui/button";
 import {
@@ -181,9 +180,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Architecture & Activity */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <ArchitectureFlow className="lg:col-span-2 animate-fade-in" />
+        {/* Recent Activity */}
+        <section>
           <RecentActivity className="animate-fade-in" />
         </section>
 
