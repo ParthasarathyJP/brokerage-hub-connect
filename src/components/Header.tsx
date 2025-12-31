@@ -20,18 +20,23 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-const navItems = [
+const primaryNavItems = [
   { path: "/", label: "Dashboard", icon: LayoutDashboard },
   { path: "/real-estate", label: "Real Estate", icon: Home },
   { path: "/services", label: "Services", icon: Briefcase },
   { path: "/wholesale", label: "Wholesale", icon: ShoppingCart },
   { path: "/materials", label: "Raw Materials", icon: Layers },
+];
+
+const secondaryNavItems = [
   { path: "/financial-assets", label: "Financial Assets", icon: TrendingUp },
   { path: "/insurance", label: "Insurance", icon: Shield },
   { path: "/digital-goods", label: "Digital Goods", icon: FileCode },
   { path: "/energy-utilities", label: "Energy & Utilities", icon: Zap },
   { path: "/agriculture", label: "Agriculture", icon: Wheat },
 ];
+
+const allNavItems = [...primaryNavItems, ...secondaryNavItems];
 
 const Header = () => {
   const location = useLocation();
@@ -50,9 +55,9 @@ const Header = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Primary */}
         <nav className="hidden lg:flex items-center gap-1">
-          {navItems.map((item) => (
+          {primaryNavItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -98,11 +103,34 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Desktop Navigation - Secondary Row */}
+      <div className="hidden lg:block border-t border-border/30">
+        <div className="container">
+          <nav className="flex items-center justify-center gap-1 py-2">
+            {secondaryNavItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "flex items-center gap-2 px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200",
+                  location.pathname === item.path
+                    ? "bg-primary text-primary-foreground shadow-soft"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                )}
+              >
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-border/50 bg-background p-4 animate-slide-up">
           <nav className="flex flex-col gap-2">
-            {navItems.map((item) => (
+            {allNavItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
