@@ -47,7 +47,6 @@ const Header = () => {
           </div>
           <div className="hidden sm:block">
             <h1 className="text-lg font-bold text-foreground">Brokerage Hub</h1>
-            <p className="text-xs text-muted-foreground">Open-Source Platform</p>
           </div>
         </Link>
 
