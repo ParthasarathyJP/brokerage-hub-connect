@@ -12,6 +12,11 @@ import {
   User,
   Menu,
   X,
+  TrendingUp,
+  Shield,
+  FileCode,
+  Zap,
+  Wheat,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -21,6 +26,11 @@ const navItems = [
   { path: "/services", label: "Services", icon: Briefcase },
   { path: "/wholesale", label: "Wholesale", icon: ShoppingCart },
   { path: "/materials", label: "Raw Materials", icon: Layers },
+  { path: "/financial-assets", label: "Financial Assets", icon: TrendingUp },
+  { path: "/insurance", label: "Insurance", icon: Shield },
+  { path: "/digital-goods", label: "Digital Goods", icon: FileCode },
+  { path: "/energy-utilities", label: "Energy & Utilities", icon: Zap },
+  { path: "/agriculture", label: "Agriculture", icon: Wheat },
 ];
 
 const Header = () => {
