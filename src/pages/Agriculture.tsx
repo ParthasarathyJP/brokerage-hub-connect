@@ -26,11 +26,24 @@ import IoTSensorDataForm from "@/components/agriculture/IoTSensorDataForm";
 import IrrigationInsuranceClaimForm from "@/components/agriculture/IrrigationInsuranceClaimForm";
 import IrrigationMarketplaceListingForm from "@/components/agriculture/IrrigationMarketplaceListingForm";
 
+// Pest Control Forms
+import PestControlFarmerRegistrationForm from "@/components/agriculture/PestControlFarmerRegistrationForm";
+import PestControlVendorRegistrationForm from "@/components/agriculture/PestControlVendorRegistrationForm";
+import PestIdentificationForm from "@/components/agriculture/PestIdentificationForm";
+import PestControlServiceRequestForm from "@/components/agriculture/PestControlServiceRequestForm";
+import PestControlContractForm from "@/components/agriculture/PestControlContractForm";
+import PestControlSubsidyForm from "@/components/agriculture/PestControlSubsidyForm";
+import TreatmentServiceLogForm from "@/components/agriculture/TreatmentServiceLogForm";
+import PestControlFeedbackForm from "@/components/agriculture/PestControlFeedbackForm";
+import PestMonitoringIoTForm from "@/components/agriculture/PestMonitoringIoTForm";
+import PestInsuranceClaimForm from "@/components/agriculture/PestInsuranceClaimForm";
+import PesticideMarketplaceForm from "@/components/agriculture/PesticideMarketplaceForm";
+
 const categories = [
   { title: "Crops & Grains", description: "Wheat, rice, corn, and cereals", icon: Wheat },
   { title: "Farm Equipment", description: "Tractors, harvesters, implements", icon: Tractor },
   { title: "Seeds & Fertilizers", description: "Agricultural inputs and nutrients", icon: Sprout },
-  { title: "Pest Control", description: "Pesticides and crop protection", icon: Bug },
+  { title: "Pest Control", description: "Pesticides and crop protection", icon: Bug, hasSubItems: true },
   { title: "Irrigation Systems", description: "Water management solutions", icon: Droplet, hasSubItems: true },
   { title: "Storage & Logistics", description: "Warehousing and cold storage", icon: Warehouse, hasSubItems: true },
 ];
