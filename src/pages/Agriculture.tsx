@@ -180,6 +180,86 @@ const irrigationSystemsForms = [
   },
 ];
 
+const pestControlForms = [
+  { 
+    id: "pest-farmer-registration",
+    title: "Farmer / Landowner Registration",
+    description: "Farmer details, land details, pest history, recurring issues & seasonal outbreaks",
+    authority: "Agriculture Department",
+    component: PestControlFarmerRegistrationForm
+  },
+  { 
+    id: "pest-vendor-registration",
+    title: "Pest Control Vendor Registration",
+    description: "Vendor details, service catalog, chemicals/biological agents, safety certifications",
+    authority: "CIB&RC / State Govt",
+    component: PestControlVendorRegistrationForm
+  },
+  { 
+    id: "pest-identification",
+    title: "Pest Identification & Diagnosis Form",
+    description: "Crop details, pest type, severity level, images/document upload for diagnosis",
+    authority: "Plant Protection",
+    component: PestIdentificationForm
+  },
+  { 
+    id: "pest-service-request",
+    title: "Pest Control Service Request Form",
+    description: "Service type, preferred schedule, budget constraints, broker/vendor selection",
+    authority: "Service Provider",
+    component: PestControlServiceRequestForm
+  },
+  { 
+    id: "pest-brokerage-contract",
+    title: "Brokerage Contract / Agreement Form",
+    description: "Parties involved, safety protocols, delivery schedule, digital signature/e-stamp",
+    authority: "Legal Authority",
+    component: PestControlContractForm
+  },
+  { 
+    id: "pest-subsidy-application",
+    title: "Government Scheme / Subsidy Application",
+    description: "Organic pest control subsidy, crop protection programs, required documents",
+    authority: "State/Central Govt",
+    component: PestControlSubsidyForm
+  },
+  { 
+    id: "treatment-service-log",
+    title: "Treatment & Service Log Form",
+    description: "Chemicals/agents used, dosage, batch number, safety compliance notes",
+    authority: "Service Provider",
+    component: TreatmentServiceLogForm
+  },
+  { 
+    id: "pest-feedback-dispute",
+    title: "Feedback & Dispute Resolution Form",
+    description: "Issue type, crop damage, safety concerns, resolution status, broker mediation",
+    authority: "Grievance Cell",
+    component: PestControlFeedbackForm
+  },
+  { 
+    id: "pest-iot-monitoring",
+    title: "IoT Monitoring Form",
+    description: "Pest traps, drone surveillance, soil sensors data recording",
+    authority: "Technology Partner",
+    component: PestMonitoringIoTForm
+  },
+  { 
+    id: "pest-insurance-claim",
+    title: "Insurance Claim Form",
+    description: "Crop loss due to pest outbreak despite treatment - claim submission",
+    authority: "Insurance Provider",
+    component: PestInsuranceClaimForm
+  },
+  { 
+    id: "pesticide-marketplace",
+    title: "Marketplace Listing Form",
+    description: "Resale of unused pesticides or organic pest control kits",
+    authority: "Marketplace",
+    component: PesticideMarketplaceForm
+  },
+];
+
 const Agriculture = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedForm, setSelectedForm] = useState<string | null>(null);
@@ -210,11 +290,27 @@ const Agriculture = () => {
     if (selectedCategory === "Irrigation Systems") {
       return irrigationSystemsForms;
     }
+    if (selectedCategory === "Pest Control") {
+      return pestControlForms;
+    }
     return [];
   };
 
+  const getCategoryDescription = () => {
+    switch (selectedCategory) {
+      case "Storage & Logistics":
+        return "Warehousing, cold storage, and transport documentation";
+      case "Irrigation Systems":
+        return "Water management, equipment, and irrigation services";
+      case "Pest Control":
+        return "Pesticides, crop protection, and pest management services";
+      default:
+        return "";
+    }
+  };
+
   const renderFormComponent = () => {
-    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms];
+    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms, ...pestControlForms];
     const form = allForms.find(f => f.id === selectedForm);
     if (form) {
       const FormComponent = form.component;
@@ -277,11 +373,7 @@ const Agriculture = () => {
           <>
             <div className="mb-8">
               <h1 className="text-3xl font-bold text-foreground mb-2">{selectedCategory} Forms</h1>
-              <p className="text-muted-foreground">
-                {selectedCategory === "Storage & Logistics" 
-                  ? "Warehousing, cold storage, and transport documentation"
-                  : "Water management, equipment, and irrigation services"}
-              </p>
+              <p className="text-muted-foreground">{getCategoryDescription()}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
