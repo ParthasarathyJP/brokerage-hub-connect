@@ -39,10 +39,27 @@ import PestMonitoringIoTForm from "@/components/agriculture/PestMonitoringIoTFor
 import PestInsuranceClaimForm from "@/components/agriculture/PestInsuranceClaimForm";
 import PesticideMarketplaceForm from "@/components/agriculture/PesticideMarketplaceForm";
 
+// Seeds & Fertilizers Forms
+import SeedProductListingForm from "@/components/agriculture/SeedProductListingForm";
+import SeedComplianceCertificationForm from "@/components/agriculture/SeedComplianceCertificationForm";
+import SeedBuyerRequestForm from "@/components/agriculture/SeedBuyerRequestForm";
+import SeedQuotationForm from "@/components/agriculture/SeedQuotationForm";
+import SeedPurchaseOrderForm from "@/components/agriculture/SeedPurchaseOrderForm";
+import SeedPaymentInvoiceForm from "@/components/agriculture/SeedPaymentInvoiceForm";
+import SeedDeliverySchedulingForm from "@/components/agriculture/SeedDeliverySchedulingForm";
+import SeedInventoryTrackingForm from "@/components/agriculture/SeedInventoryTrackingForm";
+import SeedReturnReplacementForm from "@/components/agriculture/SeedReturnReplacementForm";
+import SeedFarmerCooperativeForm from "@/components/agriculture/SeedFarmerCooperativeForm";
+import SeedSupplierOnboardingForm from "@/components/agriculture/SeedSupplierOnboardingForm";
+import SeedFeedbackRatingForm from "@/components/agriculture/SeedFeedbackRatingForm";
+import SeedDemandForecastForm from "@/components/agriculture/SeedDemandForecastForm";
+import SeedComplianceDashboardForm from "@/components/agriculture/SeedComplianceDashboardForm";
+import SeedSustainabilityReportForm from "@/components/agriculture/SeedSustainabilityReportForm";
+
 const categories = [
   { title: "Crops & Grains", description: "Wheat, rice, corn, and cereals", icon: Wheat },
   { title: "Farm Equipment", description: "Tractors, harvesters, implements", icon: Tractor },
-  { title: "Seeds & Fertilizers", description: "Agricultural inputs and nutrients", icon: Sprout },
+  { title: "Seeds & Fertilizers", description: "Agricultural inputs and nutrients", icon: Sprout, hasSubItems: true },
   { title: "Pest Control", description: "Pesticides and crop protection", icon: Bug, hasSubItems: true },
   { title: "Irrigation Systems", description: "Water management solutions", icon: Droplet, hasSubItems: true },
   { title: "Storage & Logistics", description: "Warehousing and cold storage", icon: Warehouse, hasSubItems: true },
