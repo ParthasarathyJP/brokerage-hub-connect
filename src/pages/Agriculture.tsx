@@ -277,6 +277,114 @@ const pestControlForms = [
   },
 ];
 
+const seedsFertilizersForms = [
+  { 
+    id: "seed-product-listing",
+    title: "Seed & Fertilizer Product Listing",
+    description: "Seed variety details, fertilizer type, packaging sizes, pricing tiers, and supplier details",
+    authority: "Agriculture Department",
+    component: SeedProductListingForm
+  },
+  { 
+    id: "seed-compliance-certification",
+    title: "Compliance & Certification Form",
+    description: "Seed certification, fertilizer license, safety data sheets, and organic certification",
+    authority: "Seed Certification Agency",
+    component: SeedComplianceCertificationForm
+  },
+  { 
+    id: "seed-buyer-request",
+    title: "Buyer Request Form",
+    description: "Quantity, delivery location, preferred supplier, and special requirements",
+    authority: "Marketplace",
+    component: SeedBuyerRequestForm
+  },
+  { 
+    id: "seed-quotation",
+    title: "Quotation / Price Negotiation Form",
+    description: "Price quotes, volume discounts, payment terms, and validity period",
+    authority: "Supplier",
+    component: SeedQuotationForm
+  },
+  { 
+    id: "seed-purchase-order",
+    title: "Purchase Order Form",
+    description: "Auto-generated from buyer request with order details and confirmation",
+    authority: "Procurement",
+    component: SeedPurchaseOrderForm
+  },
+  { 
+    id: "seed-payment-invoice",
+    title: "Payment & Invoice Form",
+    description: "Integrated payment processing and invoice generation",
+    authority: "Finance",
+    component: SeedPaymentInvoiceForm
+  },
+  { 
+    id: "seed-delivery-scheduling",
+    title: "Delivery Scheduling Form",
+    description: "Warehouse, cold storage, transport mode, and delivery timeline",
+    authority: "Logistics",
+    component: SeedDeliverySchedulingForm
+  },
+  { 
+    id: "seed-inventory-tracking",
+    title: "Inventory Tracking Form",
+    description: "Stock levels, batch numbers, expiry dates, and reorder alerts",
+    authority: "Warehouse",
+    component: SeedInventoryTrackingForm
+  },
+  { 
+    id: "seed-return-replacement",
+    title: "Return / Replacement Request Form",
+    description: "Handle damaged or expired product returns and replacements",
+    authority: "Customer Service",
+    component: SeedReturnReplacementForm
+  },
+  { 
+    id: "seed-farmer-cooperative",
+    title: "Farmer Cooperative Registration",
+    description: "Register farmer cooperatives for bulk purchases and benefits",
+    authority: "Cooperative Society",
+    component: SeedFarmerCooperativeForm
+  },
+  { 
+    id: "seed-supplier-onboarding",
+    title: "Supplier Onboarding Form",
+    description: "Register new suppliers with verification and compliance checks",
+    authority: "Procurement",
+    component: SeedSupplierOnboardingForm
+  },
+  { 
+    id: "seed-feedback-rating",
+    title: "Feedback & Rating Form",
+    description: "Quality feedback for seeds/fertilizers and delivery experience",
+    authority: "Quality Assurance",
+    component: SeedFeedbackRatingForm
+  },
+  { 
+    id: "seed-demand-forecast",
+    title: "Demand Forecasting Form",
+    description: "Crop season and regional demand inputs for planning",
+    authority: "Analytics",
+    component: SeedDemandForecastForm
+  },
+  { 
+    id: "seed-compliance-dashboard",
+    title: "Compliance Dashboard Input Form",
+    description: "Audit readiness and regulatory submission tracking",
+    authority: "Compliance",
+    component: SeedComplianceDashboardForm
+  },
+  { 
+    id: "seed-sustainability-report",
+    title: "Sustainability Reporting Form",
+    description: "Eco-friendly fertilizers and carbon footprint tracking",
+    authority: "Sustainability",
+    component: SeedSustainabilityReportForm
+  },
+];
+
 const Agriculture = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedForm, setSelectedForm] = useState<string | null>(null);
@@ -310,6 +418,9 @@ const Agriculture = () => {
     if (selectedCategory === "Pest Control") {
       return pestControlForms;
     }
+    if (selectedCategory === "Seeds & Fertilizers") {
+      return seedsFertilizersForms;
+    }
     return [];
   };
 
@@ -321,13 +432,15 @@ const Agriculture = () => {
         return "Water management, equipment, and irrigation services";
       case "Pest Control":
         return "Pesticides, crop protection, and pest management services";
+      case "Seeds & Fertilizers":
+        return "Agricultural inputs, nutrients, and seed management";
       default:
         return "";
     }
   };
 
   const renderFormComponent = () => {
-    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms, ...pestControlForms];
+    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms, ...pestControlForms, ...seedsFertilizersForms];
     const form = allForms.find(f => f.id === selectedForm);
     if (form) {
       const FormComponent = form.component;
