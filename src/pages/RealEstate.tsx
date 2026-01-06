@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Header from "@/components/Header";
 import PropertyPostingForm from "@/components/PropertyPostingForm";
 import { Button } from "@/components/ui/button";
@@ -12,14 +12,84 @@ import {
   List,
   Search,
   TrendingUp,
+  FileText,
+  ChevronRight,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+import {
+  BuyerInquiryForm,
+  MaintenanceRequestForm,
+  OfferToPurchaseForm,
+  RentToOwnAgreementForm,
+  RentalAgreementForm,
+  TenantApplicationForm,
+} from "@/components/realestate/ResidentialForms";
+import {
+  AssignmentSubleaseRequestForm,
+  BuildToSuitRequestForm,
+  CoWorkingMembershipForm,
+  LeaseApplicationForm,
+  LetterOfIntentForm,
+} from "@/components/realestate/CommercialForms";
+import {
+  IndustrialPropertyPurchaseForm,
+  JointVentureAgreementForm,
+  SafetyComplianceForm,
+  WarehouseLeaseForm,
+} from "@/components/realestate/IndustrialForms";
+import {
+  AuctionRegistrationForm,
+  ExchangeSwapAgreementForm,
+  LandDevelopmentRightsForm,
+  LandSaleAgreementForm,
+  LeaseForFarmingForm,
+} from "@/components/realestate/LandForms";
+import {
+  BrokerageAgreementForm,
+  DisclosureForm,
+  FeedbackComplaintForm,
+  KYCVerificationForm,
+  PaymentEscrowInstructionForm,
+} from "@/components/realestate/GeneralForms";
+
+type ActiveTab = "listings" | "post" | "forms" | "search" | "analytics";
+
+type FormKey =
+  | "buyer-inquiry"
+  | "tenant-application"
+  | "offer-to-purchase"
+  | "rental-agreement"
+  | "rent-to-own"
+  | "maintenance"
+  | "lease-application"
+  | "loi"
+  | "assignment-sublease"
+  | "build-to-suit"
+  | "coworking"
+  | "warehouse-lease"
+  | "industrial-purchase"
+  | "safety-compliance"
+  | "joint-venture"
+  | "land-sale"
+  | "lease-for-farming"
+  | "auction-registration"
+  | "development-rights"
+  | "exchange-swap"
+  | "kyc"
+  | "brokerage"
+  | "disclosure"
+  | "escrow"
+  | "feedback";
 
 const RealEstate = () => {
-  const [activeTab, setActiveTab] = useState<"listings" | "post" | "search" | "analytics">("listings");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("forms");
+  const [activeForm, setActiveForm] = useState<FormKey>("buyer-inquiry");
 
   const menuItems = [
-    { id: "listings" as const, label: "My Listings", icon: List },
+    { id: "forms" as const, label: "Forms", icon: FileText },
     { id: "post" as const, label: "Post Property", icon: Plus },
+    { id: "listings" as const, label: "My Listings", icon: List },
     { id: "search" as const, label: "Search", icon: Search },
     { id: "analytics" as const, label: "Analytics", icon: TrendingUp },
   ];
@@ -30,6 +100,129 @@ const RealEstate = () => {
     { type: "Industrial", count: 123, icon: Factory, color: "text-warning" },
     { type: "Land", count: 289, icon: Mountain, color: "text-success" },
   ];
+
+  const formGroups = useMemo(
+    () => [
+      {
+        title: "Residential",
+        items: [
+          { key: "buyer-inquiry" as const, label: "Buyer Inquiry" },
+          { key: "tenant-application" as const, label: "Tenant Application" },
+          { key: "offer-to-purchase" as const, label: "Offer to Purchase" },
+          { key: "rental-agreement" as const, label: "Rental Agreement" },
+          { key: "rent-to-own" as const, label: "Rent-to-Own Agreement" },
+          { key: "maintenance" as const, label: "Maintenance Request" },
+        ],
+      },
+      {
+        title: "Commercial",
+        items: [
+          { key: "lease-application" as const, label: "Lease Application" },
+          { key: "loi" as const, label: "Letter of Intent (LOI)" },
+          { key: "assignment-sublease" as const, label: "Assignment/Sublease Request" },
+          { key: "build-to-suit" as const, label: "Build-to-Suit Request" },
+          { key: "coworking" as const, label: "Co-Working Membership" },
+        ],
+      },
+      {
+        title: "Industrial",
+        items: [
+          { key: "warehouse-lease" as const, label: "Warehouse Lease" },
+          { key: "industrial-purchase" as const, label: "Industrial Purchase" },
+          { key: "safety-compliance" as const, label: "Safety Compliance" },
+          { key: "joint-venture" as const, label: "Joint Venture Agreement" },
+        ],
+      },
+      {
+        title: "Agricultural / Land",
+        items: [
+          { key: "land-sale" as const, label: "Land Sale Agreement" },
+          { key: "lease-for-farming" as const, label: "Lease for Farming" },
+          { key: "auction-registration" as const, label: "Auction Registration" },
+          { key: "development-rights" as const, label: "Land Development Rights" },
+          { key: "exchange-swap" as const, label: "Exchange/Swap Agreement" },
+        ],
+      },
+      {
+        title: "General",
+        items: [
+          { key: "kyc" as const, label: "KYC / Identity Verification" },
+          { key: "brokerage" as const, label: "Brokerage Agreement" },
+          { key: "disclosure" as const, label: "Disclosure" },
+          { key: "escrow" as const, label: "Payment / Escrow Instruction" },
+          { key: "feedback" as const, label: "Feedback / Complaint" },
+        ],
+      },
+    ],
+    []
+  );
+
+  const activeFormNode = useMemo(() => {
+    switch (activeForm) {
+      // Residential
+      case "buyer-inquiry":
+        return <BuyerInquiryForm />;
+      case "tenant-application":
+        return <TenantApplicationForm />;
+      case "offer-to-purchase":
+        return <OfferToPurchaseForm />;
+      case "rental-agreement":
+        return <RentalAgreementForm />;
+      case "rent-to-own":
+        return <RentToOwnAgreementForm />;
+      case "maintenance":
+        return <MaintenanceRequestForm />;
+
+      // Commercial
+      case "lease-application":
+        return <LeaseApplicationForm />;
+      case "loi":
+        return <LetterOfIntentForm />;
+      case "assignment-sublease":
+        return <AssignmentSubleaseRequestForm />;
+      case "build-to-suit":
+        return <BuildToSuitRequestForm />;
+      case "coworking":
+        return <CoWorkingMembershipForm />;
+
+      // Industrial
+      case "warehouse-lease":
+        return <WarehouseLeaseForm />;
+      case "industrial-purchase":
+        return <IndustrialPropertyPurchaseForm />;
+      case "safety-compliance":
+        return <SafetyComplianceForm />;
+      case "joint-venture":
+        return <JointVentureAgreementForm />;
+
+      // Land
+      case "land-sale":
+        return <LandSaleAgreementForm />;
+      case "lease-for-farming":
+        return <LeaseForFarmingForm />;
+      case "auction-registration":
+        return <AuctionRegistrationForm />;
+      case "development-rights":
+        return <LandDevelopmentRightsForm />;
+      case "exchange-swap":
+        return <ExchangeSwapAgreementForm />;
+
+      // General
+      case "kyc":
+        return <KYCVerificationForm />;
+      case "brokerage":
+        return <BrokerageAgreementForm />;
+      case "disclosure":
+        return <DisclosureForm />;
+      case "escrow":
+        return <PaymentEscrowInstructionForm />;
+      case "feedback":
+        return <FeedbackComplaintForm />;
+
+      default:
+        return <BuyerInquiryForm />;
+    }
+  }, [activeForm]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -84,8 +277,47 @@ const RealEstate = () => {
 
         {/* Content Area */}
         <section className="animate-fade-in">
-          {activeTab === "post" && (
-            <PropertyPostingForm />
+          {activeTab === "post" && <PropertyPostingForm />}
+
+          {activeTab === "forms" && (
+            <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Real Estate Forms</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {formGroups.map((group) => (
+                    <div key={group.title} className="space-y-2">
+                      <div className="text-sm font-semibold text-foreground">{group.title}</div>
+                      <div className="grid gap-2">
+                        {group.items.map((item) => (
+                          <button
+                            key={item.key}
+                            type="button"
+                            onClick={() => setActiveForm(item.key)}
+                            className={cn(
+                              "w-full rounded-lg border border-border px-3 py-2 text-left text-sm transition-colors",
+                              "hover:bg-muted",
+                              activeForm === item.key && "bg-muted"
+                            )}
+                          >
+                            <span className="inline-flex items-center justify-between w-full">
+                              <span className="inline-flex items-center gap-2">
+                                <FileText className="h-4 w-4 text-muted-foreground" />
+                                {item.label}
+                              </span>
+                              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <div className="min-w-0">{activeFormNode}</div>
+            </div>
           )}
 
           {activeTab === "listings" && (
@@ -97,11 +329,7 @@ const RealEstate = () => {
                 <div className="text-center py-12 text-muted-foreground">
                   <List className="h-12 w-12 mx-auto mb-4 opacity-50" />
                   <p>No properties listed yet.</p>
-                  <Button 
-                    variant="outline" 
-                    className="mt-4"
-                    onClick={() => setActiveTab("post")}
-                  >
+                  <Button variant="outline" className="mt-4" onClick={() => setActiveTab("post")}>
                     <Plus className="h-4 w-4 mr-2" />
                     Post Your First Property
                   </Button>
@@ -144,3 +372,4 @@ const RealEstate = () => {
 };
 
 export default RealEstate;
+
