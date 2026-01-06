@@ -85,7 +85,6 @@ const propertyTypes = {
 };
 
 const formSchema = z.object({
-  listingType: z.string().min(1, "Please select listing type (Sale or Rent)"),
   propertyCategory: z.string().min(1, "Please select a property category"),
   propertySubtype: z.string().min(1, "Please select a property type"),
   title: z.string().min(5, "Title must be at least 5 characters").max(100, "Title must be less than 100 characters"),
@@ -115,7 +114,6 @@ const PropertyPostingForm = () => {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      listingType: "",
       propertyCategory: "",
       propertySubtype: "",
       title: "",
@@ -160,41 +158,6 @@ const PropertyPostingForm = () => {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            {/* Listing Type Selection */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">Listing Type</h3>
-              <FormField
-                control={form.control}
-                name="listingType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Are you looking to Sell or Rent?</FormLabel>
-                    <div className="grid grid-cols-2 gap-4">
-                      {[
-                        { value: "sale", label: "For Sale", description: "Sell your property" },
-                        { value: "rent", label: "For Rent", description: "Rent out your property" },
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          type="button"
-                          onClick={() => field.onChange(option.value)}
-                          className={`p-4 rounded-lg border-2 transition-all duration-200 text-left ${
-                            field.value === option.value
-                              ? "border-primary bg-primary/10 text-primary"
-                              : "border-border hover:border-primary/50 text-muted-foreground hover:text-foreground"
-                          }`}
-                        >
-                          <span className="font-semibold block">{option.label}</span>
-                          <span className="text-sm opacity-80">{option.description}</span>
-                        </button>
-                      ))}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
             {/* Property Type Selection */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-foreground">Property Type</h3>
