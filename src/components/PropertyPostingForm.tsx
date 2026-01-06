@@ -24,6 +24,46 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Home, Building2, Factory, Mountain } from "lucide-react";
 
+const listingTypes = {
+  residential: [
+    { value: "sell-resale", label: "Sell (Resale)" },
+    { value: "sell-new", label: "Sell (New Build)" },
+    { value: "rent-short", label: "Rent (Short-term)" },
+    { value: "rent-long", label: "Rent (Long-term)" },
+    { value: "lease", label: "Lease (Formal Contract)" },
+    { value: "sublease", label: "Sublease" },
+    { value: "vacation-rental", label: "Vacation / Short-Term Rental" },
+    { value: "rent-to-own", label: "Rent-to-Own" },
+    { value: "auction", label: "Auction" },
+    { value: "pre-sale", label: "Pre-Sale / Off-Plan" },
+  ],
+  commercial: [
+    { value: "sell", label: "Sell" },
+    { value: "lease", label: "Lease" },
+    { value: "sublease", label: "Sublease" },
+    { value: "assignment", label: "Assignment (Lease Transfer)" },
+    { value: "auction", label: "Auction" },
+    { value: "build-to-suit", label: "Build-to-Suit" },
+    { value: "coworking", label: "Co-Working / Shared Space Rental" },
+  ],
+  industrial: [
+    { value: "sell", label: "Sell" },
+    { value: "lease", label: "Lease (Long-term)" },
+    { value: "rent", label: "Rent (Short-term)" },
+    { value: "sublease", label: "Sublease" },
+    { value: "auction", label: "Auction" },
+    { value: "build-to-suit", label: "Build-to-Suit" },
+  ],
+  land: [
+    { value: "sell", label: "Sell" },
+    { value: "lease", label: "Lease (Agricultural)" },
+    { value: "rent", label: "Rent (Seasonal)" },
+    { value: "auction", label: "Auction" },
+    { value: "development-rights", label: "Land Development Rights / JV" },
+    { value: "exchange", label: "Exchange / Swap" },
+  ],
+};
+
 const propertyTypes = {
   residential: {
     label: "Residential",
@@ -86,6 +126,7 @@ const propertyTypes = {
 
 const formSchema = z.object({
   propertyCategory: z.string().min(1, "Please select a property category"),
+  listingType: z.string().min(1, "Please select a listing type"),
   propertySubtype: z.string().min(1, "Please select a property type"),
   title: z.string().min(5, "Title must be at least 5 characters").max(100, "Title must be less than 100 characters"),
   description: z.string().min(20, "Description must be at least 20 characters").max(2000, "Description must be less than 2000 characters"),
@@ -115,6 +156,7 @@ const PropertyPostingForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       propertyCategory: "",
+      listingType: "",
       propertySubtype: "",
       title: "",
       description: "",
@@ -171,9 +213,10 @@ const PropertyPostingForm = () => {
                     <button
                       key={key}
                       type="button"
-                      onClick={() => {
+                    onClick={() => {
                         setSelectedCategory(key);
                         form.setValue("propertyCategory", key);
+                        form.setValue("listingType", "");
                         form.setValue("propertySubtype", "");
                       }}
                       className={`p-4 rounded-lg border-2 transition-all duration-200 text-center ${
@@ -188,6 +231,34 @@ const PropertyPostingForm = () => {
                   );
                 })}
               </div>
+
+              {/* Listing Type Selection */}
+              {selectedCategory && (
+                <FormField
+                  control={form.control}
+                  name="listingType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Listing Type</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select listing type" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {listingTypes[selectedCategory as keyof typeof listingTypes].map((type) => (
+                            <SelectItem key={type.value} value={type.value}>
+                              {type.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               {/* Subtype Selection */}
               {selectedCategory && (
