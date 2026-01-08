@@ -56,9 +56,19 @@ import SeedDemandForecastForm from "@/components/agriculture/SeedDemandForecastF
 import SeedComplianceDashboardForm from "@/components/agriculture/SeedComplianceDashboardForm";
 import SeedSustainabilityReportForm from "@/components/agriculture/SeedSustainabilityReportForm";
 
+// Farm Equipment Forms
+import FarmEquipmentBuyerInquiryForm from "@/components/agriculture/FarmEquipmentBuyerInquiryForm";
+import FarmEquipmentFinancingForm from "@/components/agriculture/FarmEquipmentFinancingForm";
+import FarmEquipmentLogisticsForm from "@/components/agriculture/FarmEquipmentLogisticsForm";
+import FarmEquipmentMaintenanceForm from "@/components/agriculture/FarmEquipmentMaintenanceForm";
+import FarmEquipmentFeedbackForm from "@/components/agriculture/FarmEquipmentFeedbackForm";
+import FarmEquipmentSubsidyForm from "@/components/agriculture/FarmEquipmentSubsidyForm";
+import FarmEquipmentInsuranceForm from "@/components/agriculture/FarmEquipmentInsuranceForm";
+import FarmEquipmentRentalForm from "@/components/agriculture/FarmEquipmentRentalForm";
+
 const categories = [
   { title: "Crops & Grains", description: "Wheat, rice, corn, and cereals", icon: Wheat },
-  { title: "Farm Equipment", description: "Tractors, harvesters, implements", icon: Tractor },
+  { title: "Farm Equipment", description: "Tractors, harvesters, implements", icon: Tractor, hasSubItems: true },
   { title: "Seeds & Fertilizers", description: "Agricultural inputs and nutrients", icon: Sprout, hasSubItems: true },
   { title: "Pest Control", description: "Pesticides and crop protection", icon: Bug, hasSubItems: true },
   { title: "Irrigation Systems", description: "Water management solutions", icon: Droplet, hasSubItems: true },
@@ -385,6 +395,17 @@ const seedsFertilizersForms = [
   },
 ];
 
+const farmEquipmentForms = [
+  { id: "equipment-buyer-inquiry", title: "Buyer Inquiry Form", description: "Express interest in purchasing farm equipment with budget and preferences", authority: "Marketplace", component: FarmEquipmentBuyerInquiryForm },
+  { id: "equipment-financing", title: "Financing & Payment Form", description: "Apply for equipment financing, loans, or leasing with subsidy eligibility", authority: "Finance", component: FarmEquipmentFinancingForm },
+  { id: "equipment-logistics", title: "Logistics & Delivery Form", description: "Schedule delivery and transport for purchased equipment", authority: "Logistics", component: FarmEquipmentLogisticsForm },
+  { id: "equipment-maintenance", title: "Maintenance Request Form", description: "Request routine maintenance, repair, or warranty service", authority: "Service Provider", component: FarmEquipmentMaintenanceForm },
+  { id: "equipment-feedback", title: "Feedback & Rating Form", description: "Rate seller, dealer, and equipment performance", authority: "Quality Assurance", component: FarmEquipmentFeedbackForm },
+  { id: "equipment-subsidy", title: "Government Subsidy/Grant Application", description: "Apply for PM-KUSUM, SMAM, and Agri Mechanization schemes", authority: "Govt Schemes", component: FarmEquipmentSubsidyForm },
+  { id: "equipment-insurance", title: "Insurance Quote Form", description: "Get insurance quotes with optional crop insurance bundling", authority: "Insurance", component: FarmEquipmentInsuranceForm },
+  { id: "equipment-rental", title: "Rental/Leasing Form", description: "Request short-term equipment hire or long-term leasing", authority: "Rental Services", component: FarmEquipmentRentalForm },
+];
+
 const Agriculture = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedForm, setSelectedForm] = useState<string | null>(null);
@@ -421,6 +442,9 @@ const Agriculture = () => {
     if (selectedCategory === "Seeds & Fertilizers") {
       return seedsFertilizersForms;
     }
+    if (selectedCategory === "Farm Equipment") {
+      return farmEquipmentForms;
+    }
     return [];
   };
 
@@ -434,13 +458,15 @@ const Agriculture = () => {
         return "Pesticides, crop protection, and pest management services";
       case "Seeds & Fertilizers":
         return "Agricultural inputs, nutrients, and seed management";
+      case "Farm Equipment":
+        return "Tractors, harvesters, implements - buying, financing, and rental";
       default:
         return "";
     }
   };
 
   const renderFormComponent = () => {
-    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms, ...pestControlForms, ...seedsFertilizersForms];
+    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms, ...pestControlForms, ...seedsFertilizersForms, ...farmEquipmentForms];
     const form = allForms.find(f => f.id === selectedForm);
     if (form) {
       const FormComponent = form.component;
