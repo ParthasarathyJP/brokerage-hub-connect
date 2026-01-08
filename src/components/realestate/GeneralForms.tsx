@@ -167,7 +167,6 @@ export function BrokerageAgreementForm() {
   const onSubmit = (data: BrokerageData) => {
     console.log("BrokerageAgreement", data);
     toast({ title: "Agreement saved", description: "Brokerage agreement details captured." });
-f
     form.reset();
   };
 
