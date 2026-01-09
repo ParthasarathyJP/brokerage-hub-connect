@@ -58,6 +58,20 @@ import SeedSustainabilityReportForm from "@/components/agriculture/SeedSustainab
 
 // Farm Equipment Forms
 import FarmEquipmentBuyerInquiryForm from "@/components/agriculture/FarmEquipmentBuyerInquiryForm";
+
+// Crops & Grains Forms
+import CropFarmerRegistrationForm from "@/components/agriculture/CropFarmerRegistrationForm";
+import CropListingForm from "@/components/agriculture/CropListingForm";
+import GrainQualityAssessmentForm from "@/components/agriculture/GrainQualityAssessmentForm";
+import CropBuyerRequirementForm from "@/components/agriculture/CropBuyerRequirementForm";
+import CropLogisticsForm from "@/components/agriculture/CropLogisticsForm";
+import CropContractForm from "@/components/agriculture/CropContractForm";
+import CropTransactionForm from "@/components/agriculture/CropTransactionForm";
+import CropComplianceForm from "@/components/agriculture/CropComplianceForm";
+import CropInsuranceForm from "@/components/agriculture/CropInsuranceForm";
+import CropWarehouseStorageForm from "@/components/agriculture/CropWarehouseStorageForm";
+import CropCertificationForm from "@/components/agriculture/CropCertificationForm";
+import CropFeedbackForm from "@/components/agriculture/CropFeedbackForm";
 import FarmEquipmentFinancingForm from "@/components/agriculture/FarmEquipmentFinancingForm";
 import FarmEquipmentLogisticsForm from "@/components/agriculture/FarmEquipmentLogisticsForm";
 import FarmEquipmentMaintenanceForm from "@/components/agriculture/FarmEquipmentMaintenanceForm";
@@ -66,8 +80,23 @@ import FarmEquipmentSubsidyForm from "@/components/agriculture/FarmEquipmentSubs
 import FarmEquipmentInsuranceForm from "@/components/agriculture/FarmEquipmentInsuranceForm";
 import FarmEquipmentRentalForm from "@/components/agriculture/FarmEquipmentRentalForm";
 
+const cropsGrainsForms = [
+  { id: "crop-farmer-registration", title: "Farmer / Producer Registration", description: "Register as a crop producer with farm details, certifications, and payment info", authority: "Agriculture Dept", component: CropFarmerRegistrationForm },
+  { id: "crop-listing", title: "Crop Listing Form", description: "List crops for sale with quantity, quality grade, and pricing", authority: "Marketplace", component: CropListingForm },
+  { id: "grain-quality-assessment", title: "Grain Quality Assessment", description: "Record moisture, foreign matter, broken grain % as per FCI standards", authority: "Quality Lab", component: GrainQualityAssessmentForm },
+  { id: "crop-buyer-requirement", title: "Buyer Requirement Form", description: "Submit crop purchase requirements with delivery and payment terms", authority: "Marketplace", component: CropBuyerRequirementForm },
+  { id: "crop-logistics", title: "Logistics & Delivery Form", description: "Schedule transport from farm/warehouse to destination", authority: "Logistics", component: CropLogisticsForm },
+  { id: "crop-contract", title: "Contract / Agreement Form", description: "Create formal contracts between buyer and seller", authority: "Legal", component: CropContractForm },
+  { id: "crop-transaction", title: "Marketplace Transaction Form", description: "Record and track marketplace transactions", authority: "Marketplace", component: CropTransactionForm },
+  { id: "crop-compliance", title: "Government Compliance Form", description: "MSP reference, GST, export license, mandi registration", authority: "Govt", component: CropComplianceForm },
+  { id: "crop-insurance", title: "Insurance Form", description: "Crop insurance and transit insurance applications", authority: "Insurance", component: CropInsuranceForm },
+  { id: "crop-warehouse-storage", title: "Warehouse Storage Form", description: "Book grain storage with fumigation services", authority: "Warehouse", component: CropWarehouseStorageForm },
+  { id: "crop-certification", title: "Certification Form", description: "Organic, ISO, FSSAI, APEDA certifications for exports", authority: "Certification", component: CropCertificationForm },
+  { id: "crop-feedback", title: "Feedback Form", description: "Buyer/seller ratings and transaction experience", authority: "Quality", component: CropFeedbackForm },
+];
+
 const categories = [
-  { title: "Crops & Grains", description: "Wheat, rice, corn, and cereals", icon: Wheat },
+  { title: "Crops & Grains", description: "Wheat, rice, corn, and cereals", icon: Wheat, hasSubItems: true },
   { title: "Farm Equipment", description: "Tractors, harvesters, implements", icon: Tractor, hasSubItems: true },
   { title: "Seeds & Fertilizers", description: "Agricultural inputs and nutrients", icon: Sprout, hasSubItems: true },
   { title: "Pest Control", description: "Pesticides and crop protection", icon: Bug, hasSubItems: true },
@@ -445,6 +474,9 @@ const Agriculture = () => {
     if (selectedCategory === "Farm Equipment") {
       return farmEquipmentForms;
     }
+    if (selectedCategory === "Crops & Grains") {
+      return cropsGrainsForms;
+    }
     return [];
   };
 
@@ -460,13 +492,15 @@ const Agriculture = () => {
         return "Agricultural inputs, nutrients, and seed management";
       case "Farm Equipment":
         return "Tractors, harvesters, implements - buying, financing, and rental";
+      case "Crops & Grains":
+        return "Wheat, rice, maize, pulses - listing, trading, and compliance";
       default:
         return "";
     }
   };
 
   const renderFormComponent = () => {
-    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms, ...pestControlForms, ...seedsFertilizersForms, ...farmEquipmentForms];
+    const allForms = [...storageLogisticsForms, ...irrigationSystemsForms, ...pestControlForms, ...seedsFertilizersForms, ...farmEquipmentForms, ...cropsGrainsForms];
     const form = allForms.find(f => f.id === selectedForm);
     if (form) {
       const FormComponent = form.component;
