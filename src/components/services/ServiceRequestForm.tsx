@@ -26,7 +26,7 @@ import { ClipboardList } from "lucide-react";
 
 const serviceCategories = {
   "Professional & Skilled": ["Consulting", "Freelancing", "Education & Training", "Healthcare Services"],
-  "Home & Maintenance": ["Plumbing", "Electrical", "Carpentry", "Cleaning & Pest Control", "Appliance Repair"],
+  "Home & Maintenance": ["Plumbing", "Electrical", "Carpentry", "Painting", "Cleaning & Pest Control", "Appliance Repair"],
   "Logistics & Delivery": ["Courier & Parcel", "Packers & Movers", "Fleet Booking"],
   "Event & Lifestyle": ["Photography & Videography", "Catering & Decor", "Beauty & Wellness"],
   "Business Support": ["Accounting & Bookkeeping", "Digital Marketing", "Customer Support"],
