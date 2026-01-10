@@ -47,6 +47,7 @@ const serviceCategories = [
       { name: "Plumbing", types: ["Repairs", "Installation", "Emergency"] },
       { name: "Electrical", types: ["Wiring", "Repairs", "Installation"] },
       { name: "Carpentry", types: ["Furniture", "Repairs", "Custom Work"] },
+      { name: "Painting", types: ["Interior", "Exterior", "Decorative", "Waterproofing"] },
       { name: "Cleaning & Pest Control", types: ["Residential", "Commercial", "Deep Cleaning"] },
       { name: "Appliance Repair", types: ["AC", "Refrigerator", "Washing Machine"] },
     ],
