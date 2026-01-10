@@ -14,6 +14,11 @@ import {
   GitBranch,
   Activity,
   DollarSign,
+  Landmark,
+  Shield,
+  FileDigit,
+  Zap,
+  Wheat,
 } from "lucide-react";
 
 const Index = () => {
@@ -97,6 +102,61 @@ const Index = () => {
         { label: "Trades", value: "89" },
       ],
     },
+    {
+      title: "Financial Assets",
+      description:
+        "Trading platform for stocks, bonds, mutual funds, and other financial instruments.",
+      icon: <Landmark className="h-6 w-6" />,
+      status: "active" as const,
+      metrics: [
+        { label: "Assets", value: "1,245" },
+        { label: "Transactions", value: "567" },
+      ],
+    },
+    {
+      title: "Insurance",
+      description:
+        "Comprehensive insurance marketplace for life, health, property, and business coverage.",
+      icon: <Shield className="h-6 w-6" />,
+      status: "active" as const,
+      metrics: [
+        { label: "Policies", value: "3,892" },
+        { label: "Claims", value: "124" },
+      ],
+    },
+    {
+      title: "Digital Goods",
+      description:
+        "Marketplace for digital products including software, licenses, and digital assets.",
+      icon: <FileDigit className="h-6 w-6" />,
+      status: "pending" as const,
+      metrics: [
+        { label: "Products", value: "8,567" },
+        { label: "Downloads", value: "2,341" },
+      ],
+    },
+    {
+      title: "Energy & Utilities",
+      description:
+        "Trading platform for energy commodities, renewable credits, and utility services.",
+      icon: <Zap className="h-6 w-6" />,
+      status: "active" as const,
+      metrics: [
+        { label: "Contracts", value: "456" },
+        { label: "MWh Traded", value: "12,890" },
+      ],
+    },
+    {
+      title: "Agriculture",
+      description:
+        "Farm equipment, crops, grains, and agricultural supplies marketplace.",
+      icon: <Wheat className="h-6 w-6" />,
+      status: "active" as const,
+      metrics: [
+        { label: "Listings", value: "5,234" },
+        { label: "Farmers", value: "1,892" },
+      ],
+    },
   ];
 
   return (
@@ -167,7 +227,7 @@ const Index = () => {
               <ArrowUpRight className="h-4 w-4" />
             </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {services.map((service, idx) => (
               <div
                 key={idx}
